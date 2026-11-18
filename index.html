@@ -326,20 +326,22 @@
     }
     .val-method { font-size: 0.75rem; color: var(--text-dim); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
-    /* 第一版純淨原生分頁按鈕 */
-    .btn-pdf {
-      display: inline-block;
+    /* 合併後的單一原生分頁按鈕 */
+    .btn-report {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       background-color: var(--cyan);
       color: #060a14;
       text-decoration: none;
-      padding: 0.45rem 0.95rem;
+      padding: 0.48rem 1rem;
       border-radius: 8px;
       font-size: 0.85rem;
       font-weight: 700;
       white-space: nowrap;
       transition: background-color 0.15s;
     }
-    .btn-pdf:hover { background-color: #7dd3fc; }
+    .btn-report:hover { background-color: #7dd3fc; }
     .btn-disabled {
       display: inline-block;
       color: var(--text-dim);
@@ -507,7 +509,7 @@
         }
       }
       /* -----------------------------------------------------------------------
-         日後要新增第 4～7 份報告，把下面這段複製貼在上面那筆的後面（記得加逗號）並修改即可：
+         日後要新增第 4～7 份報告，複製下方這段貼在上面那筆的後面（記得保留開頭的逗號）並修改即可：
       ,{
         ticker: "代號",
         company: "公司名稱",
@@ -585,9 +587,8 @@
           return `<tr>${tds}</tr>`;
         }).join('');
 
-        // 第一版純淨原生分頁超連結
         const actionBtn = hasFile
-          ? `<a class="btn-pdf" href="${item.file}" target="_blank">閱讀 PDF</a>`
+          ? `<a class="btn-report" href="${item.file}" target="_blank" rel="noopener">閱讀完整報告 ↗</a>`
           : `<span class="btn-disabled">待上傳 PDF</span>`;
 
         return `
