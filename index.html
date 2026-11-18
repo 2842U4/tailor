@@ -3,392 +3,449 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EQUITY RESEARCH | 獨立個股與產業研究庫</title>
+  <title>YANG CHENG-YING | 獨立個股與產業研究終端</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #080d1a;
-      --bg-surface: #0f172a;
-      --bg-card: #131c31;
-      --bg-card-hover: #18233c;
+      --bg-base: #060a14;
+      --bg-surface: #0c1324;
+      --bg-card: #11192e;
+      --bg-card-hover: #16213c;
+      --bg-sub: #080e1c;
       --border: rgba(148, 163, 184, 0.14);
-      --border-accent: rgba(56, 189, 248, 0.45);
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --accent-blue: #38bdf8;
-      --accent-indigo: #6366f1;
-      --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
+      --border-glow: rgba(56, 189, 248, 0.45);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-dim: #64748b;
+      --cyan: #38bdf8;
+      --indigo: #818cf8;
+      --emerald: #10b981;
+      --emerald-bg: rgba(16, 185, 129, 0.14);
+      --gold: #fbbf24;
+      --gold-bg: rgba(251, 191, 36, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-primary);
-      line-height: 1.65;
-      background-image: 
-        radial-gradient(circle at 15% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+      font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      background-image:
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 5%, rgba(129, 140, 248, 0.1) 0%, transparent 45%);
+      background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%;
       min-height: 100vh;
     }
 
-    /* Top Nav */
+    /* Top Terminal Bar */
     nav {
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(8, 13, 26, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(6, 10, 20, 0.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1140px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0.9rem 1.5rem;
+      padding: 0.85rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
     }
     .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
     }
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-emerald);
+    .live-pulse {
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-emerald);
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
     }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.88rem;
-    }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent-blue); }
-
-    /* Container */
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 3.5rem 0 2.5rem;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--accent-blue);
+    .analyst-pill {
+      font-size: 0.8rem;
+      color: var(--cyan);
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 0.25rem 0.75rem;
       border-radius: 999px;
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.25;
-      margin-bottom: 0.85rem;
-    }
-    .hero p {
-      color: var(--text-secondary);
-      max-width: 680px;
-      font-size: 1.02rem;
+      font-weight: 500;
     }
 
-    /* KPI Metrics Bar */
-    .kpi-grid {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero Header */
+    .hero {
+      padding: 3rem 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .hero-left { max-width: 720px; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+      display: block;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 3.6vw, 2.55rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero p {
+      color: var(--text-sub);
+      font-size: 0.98rem;
+    }
+
+    /* Dashboard Metrics */
+    .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-      margin: 2rem 0 2.5rem;
+      margin-bottom: 2.25rem;
     }
-    .kpi-card {
+    .stat-box {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.15rem 1.25rem;
+      padding: 1.1rem 1.25rem;
+      position: relative;
+      overflow: hidden;
     }
-    .kpi-label {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.35rem;
+    .stat-box::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0.6;
     }
-    .kpi-value {
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      margin-bottom: 0.3rem;
+    }
+    .stat-val {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--text-main);
     }
-    .kpi-sub {
+    .stat-note {
       font-size: 0.75rem;
-      color: var(--accent-emerald);
+      color: var(--emerald);
       margin-top: 0.2rem;
     }
 
-    /* Controls: Search & Filter */
-    .controls-bar {
+    /* Filter & Search Toolbar */
+    .toolbar {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
       margin-bottom: 1.75rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
     }
-    .filter-group {
+    .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.45rem;
     }
-    .filter-btn {
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      padding: 0.45rem 0.9rem;
+    .tab-btn {
+      background: transparent;
+      color: var(--text-sub);
+      border: 1px solid transparent;
+      padding: 0.42rem 0.85rem;
       border-radius: 8px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
       font-family: inherit;
     }
-    .filter-btn:hover {
-      border-color: var(--border-accent);
-      color: var(--text-primary);
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
     }
-    .filter-btn.active {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--cyan);
       font-weight: 600;
     }
-    .search-box {
+    .search-wrap {
       position: relative;
-      min-width: 260px;
+      min-width: 250px;
       flex: 1;
-      max-width: 340px;
+      max-width: 320px;
     }
-    .search-box input {
+    .search-wrap input {
       width: 100%;
-      background: var(--bg-surface);
+      background: var(--bg-sub);
       border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 0.55rem 1rem 0.55rem 2.3rem;
+      color: var(--text-main);
+      padding: 0.5rem 0.9rem 0.5rem 2.2rem;
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       outline: none;
-      transition: border-color 0.2s;
     }
-    .search-box input:focus {
-      border-color: var(--accent-blue);
-    }
-    .search-icon {
+    .search-wrap input:focus { border-color: var(--cyan); }
+    .search-wrap span {
       position: absolute;
-      left: 0.8rem;
+      left: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      color: var(--text-dim);
     }
 
-    /* Reports Grid */
-    .reports-grid {
+    /* Research Tear-Sheet Cards */
+    .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.35rem;
+      gap: 1.5rem;
       margin-bottom: 3.5rem;
     }
-    .report-card {
+    .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
     }
-    .report-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-accent);
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-glow);
       background: var(--bg-card-hover);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
     }
-    .card-top {
+
+    /* Card Header Metadata */
+    .meta-top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 0.85rem;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
     }
-    .ticker-badge {
+    .tag-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .ticker {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
       font-size: 0.85rem;
-      color: var(--accent-blue);
+      color: var(--cyan);
       background: rgba(56, 189, 248, 0.12);
-      padding: 0.2rem 0.6rem;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 0.18rem 0.55rem;
       border-radius: 6px;
-      display: inline-block;
-      margin-right: 0.45rem;
     }
-    .sector-tag {
+    .sector {
       font-size: 0.78rem;
-      color: var(--text-secondary);
+      color: var(--text-sub);
       background: rgba(148, 163, 184, 0.1);
       padding: 0.2rem 0.6rem;
       border-radius: 6px;
     }
-    .report-date {
+    .access-tag {
+      font-size: 0.76rem;
+      color: var(--indigo);
+      background: rgba(129, 140, 248, 0.12);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .date-cap {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+    }
+
+    /* Title & Institutional Rating Strip */
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .company-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .mkt-cap {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 400;
+      margin-left: 0.4rem;
+    }
+    .rating-box {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+    .rating-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: var(--emerald-bg);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .tp-pill {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-    .company-title {
-      font-size: 1.22rem;
       font-weight: 700;
-      margin-bottom: 0.35rem;
-      color: var(--text-primary);
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid rgba(251, 191, 36, 0.3);
     }
-    .report-subtitle {
-      font-size: 0.92rem;
-      color: #cbd5e1;
+
+    .headline {
+      font-size: 0.93rem;
+      color: #e2e8f0;
       font-weight: 500;
-      margin-bottom: 0.9rem;
+      margin-bottom: 1rem;
     }
-    .thesis-list {
-      list-style: none;
-      margin-bottom: 1.25rem;
-      padding: 0.85rem 1rem;
-      background: rgba(8, 13, 26, 0.45);
-      border-radius: 8px;
-      border-left: 3px solid var(--accent-indigo);
+
+    /* Key Thesis Bullets */
+    .thesis-box {
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
     }
-    .thesis-list li {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.4rem;
-      padding-left: 0.9rem;
+    .thesis-box ul { list-style: none; }
+    .thesis-box li {
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      margin-bottom: 0.42rem;
+      padding-left: 0.95rem;
       position: relative;
     }
-    .thesis-list li:last-child { margin-bottom: 0; }
-    .thesis-list li::before {
-      content: "›";
+    .thesis-box li:last-child { margin-bottom: 0; }
+    .thesis-box li::before {
+      content: "▸";
       position: absolute;
       left: 0;
-      color: var(--accent-blue);
-      font-weight: 700;
+      color: var(--cyan);
     }
-    .card-footer {
+
+    /* Mini Financial Estimate Table */
+    .model-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.15rem;
+      background: rgba(6, 10, 20, 0.55);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+    .model-table th, .model-table td {
+      padding: 0.45rem 0.6rem;
+      text-align: right;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+    .model-table th:first-child, .model-table td:first-child {
+      text-align: left;
+      color: var(--text-sub);
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .model-table th {
+      color: var(--text-dim);
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .model-table td { color: var(--text-main); font-weight: 600; }
+    .highlight-num { color: var(--emerald) !important; }
+
+    /* Card Footer */
+    .card-foot {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 1rem;
+      padding-top: 0.95rem;
       border-top: 1px solid var(--border);
       gap: 0.75rem;
     }
-    .valuation-tag {
+    .val-method {
       font-size: 0.76rem;
-      color: var(--accent-amber);
+      color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
     }
-    .btn-group {
-      display: flex;
-      gap: 0.5rem;
-    }
+    .actions { display: flex; gap: 0.5rem; }
     .btn {
       font-size: 0.82rem;
       font-weight: 600;
-      padding: 0.45rem 0.85rem;
-      border-radius: 7px;
-      text-decoration: none;
+      padding: 0.48rem 0.9rem;
+      border-radius: 8px;
       cursor: pointer;
+      text-decoration: none;
       border: none;
-      transition: all 0.2s;
-      font-family: inherit;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
+      transition: all 0.2s;
+      font-family: inherit;
     }
-    .btn-primary {
-      background: var(--accent-blue);
-      color: #080d1a;
+    .btn-cyan {
+      background: var(--cyan);
+      color: #060a14;
     }
-    .btn-primary:hover {
-      background: #7dd3fc;
-    }
-    .btn-outline {
+    .btn-cyan:hover { background: #7dd3fc; }
+    .btn-ghost {
       background: transparent;
-      color: var(--text-primary);
+      color: var(--text-main);
       border: 1px solid var(--border);
     }
-    .btn-outline:hover {
-      border-color: var(--text-secondary);
+    .btn-ghost:hover {
+      border-color: var(--text-sub);
       background: rgba(255, 255, 255, 0.04);
-    }
-
-    /* Methodology Section */
-    .method-section {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 3rem;
-    }
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .section-title::before {
-      content: "";
-      display: inline-block;
-      width: 4px;
-      height: 18px;
-      background: var(--accent-blue);
-      border-radius: 2px;
-    }
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-    }
-    .method-item h3 {
-      font-size: 0.95rem;
-      color: var(--accent-blue);
-      margin-bottom: 0.4rem;
-    }
-    .method-item p {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
     }
 
     /* Footer */
@@ -396,78 +453,76 @@
       border-top: 1px solid var(--border);
       padding: 2rem 0 3rem;
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-size: 0.8rem;
     }
 
-    /* PDF Modal Viewer */
-    .modal-backdrop {
+    /* Fullscreen PDF Reader Modal */
+    .modal {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 15, 0.88);
-      backdrop-filter: blur(6px);
+      background: rgba(3, 6, 14, 0.9);
+      backdrop-filter: blur(8px);
       z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 1.25rem;
+      padding: 1rem;
     }
-    .modal-backdrop.open { display: flex; }
-    .modal-window {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-accent);
-      border-radius: 14px;
+    .modal.open { display: flex; }
+    .modal-box {
       width: 100%;
-      max-width: 1050px;
-      height: 88vh;
+      max-width: 1160px;
+      height: 91vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     }
-    .modal-header {
-      padding: 0.85rem 1.25rem;
+    .modal-top {
+      padding: 0.75rem 1.2rem;
       background: var(--bg-card);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
-    .modal-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .modal-actions {
+    .modal-switcher {
       display: flex;
-      gap: 0.6rem;
       align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
-    .modal-body {
+    .switch-chip {
+      font-size: 0.78rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-sub);
+      color: var(--text-sub);
+      cursor: pointer;
+      font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif;
+    }
+    .switch-chip.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      font-weight: 700;
+    }
+    .modal-frame {
       flex: 1;
+      width: 100%;
+      border: none;
       background: #1e293b;
     }
-    .modal-body iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
 
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--text-secondary);
-      background: var(--bg-surface);
-      border-radius: 12px;
-      border: 1px dashed var(--border);
-    }
-
-    @media (max-width: 820px) {
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .reports-grid { grid-template-columns: 1fr; }
-      .method-grid { grid-template-columns: 1fr; }
+    @media (max-width: 860px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -476,265 +531,313 @@
   <nav>
     <div class="nav-inner">
       <div class="brand">
-        <span class="brand-dot"></span>
-        EQUITY RESEARCH HUB
+        <span class="live-pulse"></span>
+        EQUITY RESEARCH TERMINAL
       </div>
-      <div class="nav-links">
-        <a href="#reports">研究報告庫</a>
-        <a href="#methodology">分析框架</a>
-      </div>
+      <div class="analyst-pill">研究員：楊政穎 | 獨立個股與供應鏈研究</div>
     </div>
   </nav>
 
   <main class="container">
-    <!-- Hero -->
     <section class="hero">
-      <div class="hero-badge">FUNDAMENTAL & QUANTITATIVE EQUITY RESEARCH</div>
-      <h1>個股深度研究與產業供應鏈追蹤</h1>
-      <p>聚焦台股電子產業、半導體設備與科技供應鏈。透過財務模型拆解、產品組合毛利率推演與同業估值比較，建構具邏輯一致性的獨立投資研究筆記。</p>
-
-      <!-- KPI Summary -->
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">已發布研究報告</div>
-          <div class="kpi-value" id="kpi-count">0 篇</div>
-          <div class="kpi-sub">持續追蹤更新中</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">核心研究領域</div>
-          <div class="kpi-value" style="font-size: 1.1rem; padding-top: 0.25rem;">半導體 / AI 供應鏈</div>
-          <div class="kpi-sub">上游設備至下游組裝</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">主要估值方法</div>
-          <div class="kpi-value" style="font-size: 1.1rem; padding-top: 0.25rem;">PE Band / DCF</div>
-          <div class="kpi-sub">歷史本益比區間與現金流</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">最近更新日期</div>
-          <div class="kpi-value" id="kpi-latest">2026.11</div>
-          <div class="kpi-sub">財報與法說會同步</div>
-        </div>
+      <div class="hero-left">
+        <span class="eyebrow">// BOTTOM-UP FUNDAMENTAL & SUPPLY CHAIN COVERAGE</span>
+        <h1>個股深度研究與財務模型資料庫</h1>
+        <p>整合公司私訪、法說會紀要、產品組合毛利率拆解與 2025–2028F 財務三表預估模型，專注發掘高成長能見度與評價重估（Re-rating）標的。</p>
       </div>
     </section>
 
-    <!-- Reports Section -->
-    <section id="reports">
-      <div class="controls-bar">
-        <div class="filter-group" id="filter-buttons">
-          <!-- 自動由 JS 產生分類按鈕 -->
-        </div>
-        <div class="search-box">
-          <span class="search-icon">⌕</span>
-          <input type="text" id="search-input" placeholder="搜尋代號、公司或關鍵字..." />
-        </div>
+    <!-- KPI Strip -->
+    <section class="stats-row">
+      <div class="stat-box">
+        <div class="stat-label">覆蓋研究標的</div>
+        <div class="stat-val" id="stat-total">0 檔</div>
+        <div class="stat-note">持續新增深度報告中</div>
       </div>
+      <div class="stat-box">
+        <div class="stat-label">核心追蹤產業</div>
+        <div class="stat-val" style="font-size: 1.08rem; padding-top: 0.22rem;">光通訊 / 封測 / 石英元件</div>
+        <div class="stat-note">800G・1.6T 升級與車用電子</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">研究方法論</div>
+        <div class="stat-val" style="font-size: 1.08rem; padding-top: 0.22rem;">私訪調研 + 營收拆解模型</div>
+        <div class="stat-note">2025–2028F 季度損益預估</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">最近報告更新</div>
+        <div class="stat-val" id="stat-latest">2026.11</div>
+        <div class="stat-note">法說與拜訪後即時更新</div>
+      </div>
+    </section>
 
-      <div class="reports-grid" id="reports-container">
-        <!-- 自動由 JS 渲染研究報告卡片 -->
+    <!-- Filter & Search -->
+    <section class="toolbar">
+      <div class="tabs" id="sector-tabs"></div>
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input type="text" id="search-input" placeholder="搜尋代號、公司、1.6T、CPO..." />
       </div>
     </section>
 
-    <!-- Research Methodology -->
-    <section class="method-section" id="methodology">
-      <div class="section-title">研究方法與報告架構</div>
-      <div class="method-grid">
-        <div class="method-item">
-          <h3>01. 產業位置與競爭壁壘</h3>
-          <p>釐清公司在供應鏈中的議價能力、客戶認證門檻與技術護城河，評估產業順風期下的市占率擴張潛力。</p>
-        </div>
-        <div class="method-item">
-          <h3>02. 營收結構與三率推演</h3>
-          <p>拆解各產品線營收比重與毛利率變化，追蹤研發費用率與營業槓桿效應，預估未來四季 EPS 成長動能。</p>
-        </div>
-        <div class="method-item">
-          <h3>03. 情境假設與風險報酬比</h3>
-          <p>結合歷史本益比（PE Band）與同業評價比較，設定樂觀／基準／保守三種財務情境，明確定義下檔風險。</p>
-        </div>
-      </div>
-    </section>
+    <!-- Reports Grid -->
+    <section class="grid" id="cards-grid"></section>
   </main>
 
   <footer>
     <div class="container">
-      免責聲明：本網站所載之個股研究報告與財務推估僅為個人學術研究與投資覆盤紀錄，不構成任何證券買賣之要約或投資建議。
+      免責聲明：本網站所載之個股研究報告、目標價與財務預估僅為個人學術研究與投資分析紀錄，不構成任何證券買賣之要約或投資建議。
     </div>
   </footer>
 
-  <!-- PDF Modal Viewer -->
-  <div class="modal-backdrop" id="pdf-modal">
-    <div class="modal-window">
-      <div class="modal-header">
-        <div class="modal-title" id="modal-title">研究報告預覽</div>
-        <div class="modal-actions">
-          <a id="modal-newtab" href="#" target="_blank" class="btn btn-outline">新分頁開啟 ↗</a>
-          <button class="btn btn-primary" onclick="closeModal()">關閉 ✕</button>
+  <!-- PDF Viewer Modal with Quick Switcher -->
+  <div class="modal" id="pdf-modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-switcher" id="modal-switcher"></div>
+        <div class="actions">
+          <a id="modal-download" href="#" target="_blank" class="btn btn-ghost">新分頁開啟 ↗</a>
+          <button class="btn btn-cyan" onclick="closeModal()">關閉 ✕</button>
         </div>
       </div>
-      <div class="modal-body">
-        <iframe id="pdf-frame" src=""></iframe>
-      </div>
+      <iframe class="modal-frame" id="pdf-frame" src=""></iframe>
     </div>
   </div>
 
   <script>
     // =========================================================================
-    // 【你的報告資料庫】日後新增 6-7 份報告，只要在這裡複製貼上並修改內容即可！
+    // 【研究報告資料庫】目前已填入你上傳的 3 份報告，其餘 3-4 份照格式往下加即可
     // =========================================================================
     const reportsData = [
       {
+        ticker: "6271",
+        company: "同欣電",
+        mktCap: "市值 421億",
+        sector: "封測",
+        accessType: "10人私訪",
+        date: "2026/11/04",
+        rating: "買進",
+        targetPrice: "CPO / 800G 放量",
+        headline: "切入 Marvell 長距離光通訊 800G/1.6T，高毛利產品帶動三率逐季走揚",
+        valuation: "估值追蹤：高 ASP 光通與車用營收佔比提升",
+        file: "同欣電(6271) .pdf", // 注意：你的檔名括號後面有一個空白，上傳到 GitHub 需完全一致
+        thesis: [
+          "RF/光通訊強勁成長：800G（含 TIA/FAU）已量產，27 年底進入 1.6T，對位機台擴產打開產能瓶頸",
+          "車用 CIS 穩健擴張：承接勝麗專利，高畫素（3M/8M）IBGA 近乎獨占，受惠中國車廠出海與 ADAS 升級",
+          "毛利率結構優化：1Q26–3Q26 毛利率由 27.97% 攀升至 33%，預期 4Q26 達 35% 且 2027 年續揚"
+        ],
+        financials: {
+          headers: ["預估指標", "2025", "2026F", "2027F", "2028F"],
+          rows: [
+            ["營收 ($mn)", "11,543", "13,038", "18,233", "21,847"],
+            ["營收 YoY", "-", "+13%", "+40%", "+20%"],
+            ["RF 營收佔比", "11%", "13%", "18%", "19%"]
+          ]
+        }
+      },
+      {
+        ticker: "3042",
+        company: "晶技",
+        mktCap: "市值 577億",
+        sector: "石英元件",
+        accessType: "線上法說",
+        date: "2026/07/17",
+        rating: "買進",
+        targetPrice: "TP 311 (+84%)",
+        headline: "800G/1.6T 高頻低抖動石英元件放量，Photodie 擴產鎖定高毛利 AI 光通商機",
+        valuation: "目標價 311 元（2027F PE 25x，潛在漲幅 84%）",
+        file: "晶技(3042)-終極.pdf",
+        thesis: [
+          "光通訊規格升級紅利：156.25MHz（800G）放量、312.5MHz（1.6T）通過驗證，低抖動（<30fs）優於 MEMS",
+          "Photodie 產能倍增：月產能由 8kk 擴至 27 年底 40kk，6–7 成鎖定毛利 40%+ 光通訊應用",
+          "AI 營收佔比跳升：預估 2027 年光通訊貢獻營收達 87.66 億元，帶動整體毛利率結構性上移"
+        ],
+        financials: {
+          headers: ["預估指標", "2025", "2026F", "2027F", "2028F"],
+          rows: [
+            ["營收 (NT$M)", "13,350", "15,250", "24,156", "35,034"],
+            ["AI 營收佔比", "10.3%", "16.0%", "37.0%", "48.7%"],
+            ["預估 EPS (元)", "5.27", "7.16", "12.45", "20.60"]
+          ]
+        }
+      },
+      {
         ticker: "3055",
         company: "蔚華科",
+        mktCap: "半導體設備",
         sector: "半導體設備",
-        date: "2026-11",
-        title: "半導體檢測與代理業務轉型、營運結構深度拆解",
-        valuation: "估值模型：PE Band / 轉型成長推估",
-        file: "蔚華科(3055).pdf", // 必須與你上傳到 GitHub 的 PDF 檔名完全一致
+        accessType: "深度研究",
+        date: "2026/11",
+        rating: "追蹤",
+        targetPrice: "自有設備轉型",
+        headline: "半導體檢測與代理業務結構調整，自有光學檢測設備切入先進封裝",
+        valuation: "估值追蹤：PE Band / 轉型營運槓桿",
+        file: "蔚華科(3055).pdf",
         thesis: [
-          "代理業務結構調整，高毛利自有檢測設備比重逐步提升",
-          "切入先進封裝與光學檢測需求，評估新產品放量時程",
-          "追蹤營收谷底回升訊號與營業利益率改善空間"
-        ]
+          "代理業務結構優化，高毛利自有檢測設備營收比重逐步拉升",
+          "切入先進封裝與光學檢測需求，追蹤新產品客戶驗證與放量進度",
+          "觀察營收谷底回升訊號與營業利益率改善空間"
+        ],
+        financials: {
+          headers: ["追蹤重點", "營運階段", "核心動能", "觀察指標"],
+          rows: [
+            ["業務轉型", "結構調整期", "自有檢測設備", "毛利率擴張幅度"]
+          ]
+        }
       },
       {
-        ticker: "範例 #2",
-        company: "請替換為你的第 2 檔標的",
-        sector: "AI 伺服器",
-        date: "2026-10",
-        title: "上傳 PDF 後，將下方 file 欄位改成你的檔名即可啟用",
-        valuation: "估值模型：DCF / 同業本益比比較",
-        file: "", // 尚未上傳時留空，上傳後填入例如 "2382_廣達.pdf"
-        thesis: [
-          "核心觀點一：填寫該公司最關鍵的營收成長驅動力",
-          "核心觀點二：填寫毛利率或產品組合優化的關鍵數據",
-          "核心觀點三：填寫目標估值區間與主要觀察指標"
-        ]
-      },
-      {
-        ticker: "範例 #3",
-        company: "請替換為你的第 3 檔標的",
-        sector: "IC 設計",
-        date: "2026-09",
-        title: "上傳 PDF 後，將下方 file 欄位改成你的檔名即可啟用",
-        valuation: "估值模型：Historical PE Band",
+        ticker: "待新增 #4",
+        company: "上傳第 4 份報告後替換",
+        mktCap: "市值 -- 億",
+        sector: "AI 供應鏈",
+        accessType: "法說 / 拜訪",
+        date: "2026/10",
+        rating: "買進",
+        targetPrice: "TP -- 元",
+        headline: "將 PDF 上傳至 GitHub 後，在此填入公司代號、核心投資邏輯與預估 EPS",
+        valuation: "估值模型：PE / DCF",
         file: "",
         thesis: [
-          "核心觀點一：庫存去化進度與新規格滲透率分析",
-          "核心觀點二：晶圓代工成本變化對毛利率之影響",
-          "核心觀點三：法說會展望與財務模型敏感度測試"
-        ]
-      },
-      {
-        ticker: "範例 #4",
-        company: "請替換為你的第 4 檔標的",
-        sector: "半導體設備",
-        date: "2026-08",
-        title: "上傳 PDF 後，將下方 file 欄位改成你的檔名即可啟用",
-        valuation: "估值模型：訂單能見度與 PE 評價",
-        file: "",
-        thesis: [
-          "核心觀點一：大客戶資本支出上修受惠程度拆解",
-          "核心觀點二：在手訂單與合約負債歷史水位追蹤",
-          "核心觀點三：同業評價比較與風險報酬比評估"
-        ]
+          "核心觀點一：填寫關鍵產品放量時程與市占率變化",
+          "核心觀點二：填寫毛利率或產品組合優化推演",
+          "核心觀點三：填寫目標價計算基準與下檔風險"
+        ],
+        financials: {
+          headers: ["預估指標", "2025", "2026F", "2027F", "2028F"],
+          rows: [
+            ["預估 EPS (元)", "-", "-", "-", "-"]
+          ]
+        }
       }
-      // 還有第 5、6、7 份報告？直接複製上面 { ... }, 的區塊貼在這裡即可！
+      // 第 5、6、7 份報告：直接複製上方 { ... }, 區塊貼在這裡即可！
     ];
 
     // =========================================================================
-    // 以下為自動渲染與互動程式（不需修改）
+    // 系統渲染與互動引擎（無需修改）
     // =========================================================================
-    const container = document.getElementById('reports-container');
-    const filterContainer = document.getElementById('filter-buttons');
+    const grid = document.getElementById('cards-grid');
+    const tabsWrap = document.getElementById('sector-tabs');
     const searchInput = document.getElementById('search-input');
-    let currentSector = '全部';
+    let activeSector = '全部';
 
-    // 更新 KPI 統計
-    document.getElementById('kpi-count').textContent = `${reportsData.length} 篇`;
-    if (reportsData.length > 0) {
-      document.getElementById('kpi-latest').textContent = reportsData[0].date.replace('-', '.');
+    // 更新頂部統計數據
+    const validReports = reportsData.filter(r => r.file && r.file.trim() !== "");
+    document.getElementById('stat-total').textContent = `${validReports.length} 檔`;
+    if (validReports.length > 0) {
+      document.getElementById('stat-latest').textContent = validReports[0].date.slice(0, 7).replace('/', '.');
     }
 
-    // 自動產生產業分類按鈕
+    // 產生分類按鈕
     const sectors = ['全部', ...new Set(reportsData.map(r => r.sector))];
-    sectors.forEach(sector => {
+    sectors.forEach(sec => {
       const btn = document.createElement('button');
-      btn.className = `filter-btn ${sector === '全部' ? 'active' : ''}`;
-      btn.textContent = sector;
+      btn.className = `tab-btn ${sec === '全部' ? 'active' : ''}`;
+      btn.textContent = sec;
       btn.onclick = () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        currentSector = sector;
-        renderReports();
+        activeSector = sec;
+        renderCards();
       };
-      filterContainer.appendChild(btn);
+      tabsWrap.appendChild(btn);
     });
 
     // 渲染報告卡片
-    function renderReports() {
-      const keyword = searchInput.value.trim().toLowerCase();
-      const filtered = reportsData.filter(item => {
-        const matchSector = currentSector === '全部' || item.sector === currentSector;
-        const matchKeyword = !keyword || 
-          item.ticker.toLowerCase().includes(keyword) ||
-          item.company.toLowerCase().includes(keyword) ||
-          item.title.toLowerCase().includes(keyword) ||
-          item.thesis.some(t => t.toLowerCase().includes(keyword));
-        return matchSector && matchKeyword;
+    function renderCards() {
+      const q = searchInput.value.trim().toLowerCase();
+      const list = reportsData.filter(item => {
+        const matchSec = activeSector === '全部' || item.sector === activeSector;
+        const matchQ = !q ||
+          item.ticker.toLowerCase().includes(q) ||
+          item.company.toLowerCase().includes(q) ||
+          item.headline.toLowerCase().includes(q) ||
+          item.thesis.some(t => t.toLowerCase().includes(q));
+        return matchSec && matchQ;
       });
 
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="empty-state">找不到符合「${keyword}」的研究報告，請嘗試其他關鍵字。</div>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map(item => {
+      grid.innerHTML = list.map((item) => {
         const hasFile = item.file && item.file.trim() !== "";
-        const thesisHtml = item.thesis.map(point => `<li>${point}</li>`).join('');
-        const actionButtons = hasFile 
-          ? `<button class="btn btn-primary" onclick="openModal('${item.ticker} ${item.company}', '${item.file}')">線上閱讀</button>
-             <a class="btn btn-outline" href="${item.file}" target="_blank">PDF ↗</a>`
-          : `<button class="btn btn-outline" style="opacity:0.5; cursor:not-allowed;" onclick="alert('請先將 PDF 上傳至 GitHub，並在 index.html 的 file 欄位填入檔名！')">待上傳 PDF</button>`;
+        const encodedUrl = hasFile ? encodeURI(item.file) : "";
+        const thesisHtml = item.thesis.map(t => `<li>${t}</li>`).join('');
+
+        // 財務小表格
+        const thHtml = item.financials.headers.map(h => `<th>${h}</th>`).join('');
+        const trHtml = item.financials.rows.map(row => {
+          const tds = row.map((cell, idx) => {
+            const isHighlight = idx >= 2 && (cell.includes('+') || cell.includes('%') || !isNaN(parseFloat(cell)));
+            return `<td class="${isHighlight ? 'highlight-num' : ''}">${cell}</td>`;
+          }).join('');
+          return `<tr>${tds}</tr>`;
+        }).join('');
+
+        const btnGroup = hasFile
+          ? `<button class="btn btn-cyan" onclick="openReader('${item.ticker}')">閱讀完整報告</button>
+             <a class="btn btn-ghost" href="${encodedUrl}" target="_blank">PDF ↗</a>`
+          : `<button class="btn btn-ghost" style="opacity:0.45; cursor:not-allowed;" onclick="alert('請先上傳 PDF 並在 reportsData 填入檔名')">待上傳 PDF</button>`;
 
         return `
-          <article class="report-card">
+          <article class="card">
             <div>
-              <div class="card-top">
-                <div>
-                  <span class="ticker-badge">${item.ticker}</span>
-                  <span class="sector-tag">${item.sector}</span>
+              <div class="meta-top">
+                <div class="tag-cluster">
+                  <span class="ticker">${item.ticker}</span>
+                  <span class="sector">${item.sector}</span>
+                  <span class="access-tag">${item.accessType}</span>
                 </div>
-                <span class="report-date">${item.date}</span>
+                <span class="date-cap">${item.date}</span>
               </div>
-              <h2 class="company-title">${item.company}</h2>
-              <div class="report-subtitle">${item.title}</div>
-              <ul class="thesis-list">
-                ${thesisHtml}
-              </ul>
+
+              <div class="title-row">
+                <h2 class="company-name">${item.company}<span class="mkt-cap">${item.mktCap}</span></h2>
+                <div class="rating-box">
+                  <span class="rating-pill">${item.rating}</span>
+                  <span class="tp-pill">${item.targetPrice}</span>
+                </div>
+              </div>
+
+              <div class="headline">${item.headline}</div>
+
+              <div class="thesis-box">
+                <ul>${thesisHtml}</ul>
+              </div>
+
+              <table class="model-table">
+                <thead><tr>${thHtml}</tr></thead>
+                <tbody>${trHtml}</tbody>
+              </table>
             </div>
-            <div class="card-footer">
-              <span class="valuation-tag">${item.valuation}</span>
-              <div class="btn-group">
-                ${actionButtons}
-              </div>
+
+            <div class="card-foot">
+              <span class="val-method">${item.valuation}</span>
+              <div class="actions">${btnGroup}</div>
             </div>
           </article>
         `;
       }).join('');
     }
 
-    searchInput.addEventListener('input', renderReports);
+    searchInput.addEventListener('input', renderCards);
 
-    // Modal 控制
+    // Modal PDF 閱讀器與快速切換
     const modal = document.getElementById('pdf-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalNewTab = document.getElementById('modal-newtab');
     const pdfFrame = document.getElementById('pdf-frame');
+    const modalDownload = document.getElementById('modal-download');
+    const modalSwitcher = document.getElementById('modal-switcher');
 
-    function openModal(title, fileUrl) {
-      modalTitle.textContent = `${title} — 研究報告預覽`;
-      modalNewTab.href = fileUrl;
-      pdfFrame.src = fileUrl;
+    function openReader(ticker) {
+      const target = validReports.find(r => r.ticker === ticker) || validReports[0];
+      if (!target) return;
+
+      // 建立上方快速切換按鈕
+      modalSwitcher.innerHTML = validReports.map(r => `
+        <button class="switch-chip ${r.ticker === target.ticker ? 'active' : ''}" onclick="openReader('${r.ticker}')">
+          ${r.ticker} ${r.company}
+        </button>
+      `).join('');
+
+      const url = encodeURI(target.file);
+      pdfFrame.src = url;
+      modalDownload.href = url;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -745,16 +848,10 @@
       document.body.style.overflow = '';
     }
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // 初次渲染
-    renderReports();
+    renderCards();
   </script>
 </body>
 </html>
