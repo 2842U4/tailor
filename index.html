@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>個人股票研究報告作品集</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #1d4ed8;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header h1 { font-size: 1.85rem; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    header p { color: #cbd5e1; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .container { max-width: 960px; margin: 2rem auto; padding: 0 1.25rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 0.9rem 0.75rem; border-bottom: 1px solid var(--border); }
+    th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+    td { font-size: 0.95rem; }
+    .ticker {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .btn-pdf {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .btn-pdf:hover { background-color: #1e40af; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 2rem 1rem 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>個股與產業研究報告集</h1>
+    <p>專注於基本面分析、財務模型估值與產業供應鏈追蹤</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>關於研究方法</h2>
+      <p>本頁面彙整個人撰寫的個股深度研究報告與財報追蹤筆記，涵蓋產業競爭格局、營收拆解、毛利率趨勢與同業估值比較。</p>
+    </section>
+
+    <section class="card">
+      <h2>研究報告清單</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>發布日期</th>
+              <th>公司 / 代號</th>
+              <th>報告主題與核心觀點</th>
+              <th>完整報告</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2026-11</td>
+              <td><span class="ticker">3055</span> 蔚華科</td>
+              <td>個股基本面分析與半導體設備營運展望研究</td>
+              <td><a class="btn-pdf" href="蔚華科(3055).pdf" target="_blank">閱讀 PDF</a></td>
+            </tr>
+
+            <!-- 日後要新增報告，複製下方這段 <tr>...</tr> 貼在上面那筆的後面並修改內容即可
+            <tr>
+              <td>2026-12</td>
+              <td><span class="ticker">代號</span> 公司名稱</td>
+              <td>報告主題與核心觀點</td>
+              <td><a class="btn-pdf" href="你的檔名.pdf" target="_blank">閱讀 PDF</a></td>
+            </tr>
+            -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    免責聲明：本網站所載報告僅為個人研究紀錄與學術交流用途，不構成任何投資買賣建議。
+  </footer>
+
+</body>
+</html>
