@@ -6,7 +6,7 @@
   <title>YANG CHENG-YING | 獨立個股與產業研究終端</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-base: #060a14;
@@ -14,8 +14,8 @@
       --bg-card: #11192e;
       --bg-card-hover: #16213c;
       --bg-sub: #080e1c;
-      --border: rgba(148, 163, 184, 0.14);
-      --border-glow: rgba(56, 189, 248, 0.45);
+      --border: rgba(148, 163, 184, 0.15);
+      --border-glow: rgba(56, 189, 248, 0.5);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --text-dim: #64748b;
@@ -30,26 +30,20 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+      font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-base);
       color: var(--text-main);
       line-height: 1.6;
-      background-image:
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 85% 5%, rgba(129, 140, 248, 0.1) 0%, transparent 45%);
-      background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%;
+      background-image: radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.09) 0%, transparent 45%);
       min-height: 100vh;
     }
 
-    /* Top Terminal Bar */
+    /* Top Bar (移除高耗能 backdrop-filter) */
     nav {
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(6, 10, 20, 0.88);
-      backdrop-filter: blur(14px);
+      background: rgba(6, 10, 20, 0.96);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
@@ -75,7 +69,7 @@
       height: 9px;
       border-radius: 50%;
       background: var(--emerald);
-      box-shadow: 0 0 10px var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
     }
     .analyst-pill {
       font-size: 0.8rem;
@@ -93,128 +87,87 @@
       padding: 0 1.5rem;
     }
 
-    /* Hero Header */
-    .hero {
-      padding: 3rem 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
+    /* Hero */
+    .hero { padding: 2.75rem 0 1.75rem; }
     .hero-left { max-width: 720px; }
     .eyebrow {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       color: var(--cyan);
       letter-spacing: 0.08em;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.6rem;
       display: block;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 3.6vw, 2.55rem);
+      font-size: clamp(1.75rem, 3.5vw, 2.45rem);
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.7rem;
     }
-    .hero p {
-      color: var(--text-sub);
-      font-size: 0.98rem;
-    }
+    .hero p { color: var(--text-sub); font-size: 0.96rem; }
 
-    /* Dashboard Metrics */
+    /* KPI Strip */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-      margin-bottom: 2.25rem;
+      margin-bottom: 2rem;
     }
     .stat-box {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.1rem 1.25rem;
-      position: relative;
-      overflow: hidden;
+      padding: 1.05rem 1.2rem;
     }
-    .stat-box::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), transparent);
-      opacity: 0.6;
-    }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--text-sub);
-      margin-bottom: 0.3rem;
-    }
+    .stat-label { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 0.25rem; }
     .stat-val {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-main);
     }
-    .stat-note {
-      font-size: 0.75rem;
-      color: var(--emerald);
-      margin-top: 0.2rem;
-    }
+    .stat-note { font-size: 0.74rem; color: var(--emerald); margin-top: 0.2rem; }
 
-    /* Filter & Search Toolbar */
+    /* Filter & Search */
     .toolbar {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.75rem;
-      padding: 1rem 1.25rem;
+      margin-bottom: 1.65rem;
+      padding: 0.9rem 1.2rem;
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
     }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
+    .tabs { display: flex; flex-wrap: wrap; gap: 0.45rem; }
     .tab-btn {
       background: transparent;
       color: var(--text-sub);
       border: 1px solid transparent;
-      padding: 0.42rem 0.85rem;
+      padding: 0.4rem 0.85rem;
       border-radius: 8px;
       font-size: 0.84rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
       font-family: inherit;
     }
-    .tab-btn:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.04);
-    }
+    .tab-btn:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.04); }
     .tab-btn.active {
       background: rgba(56, 189, 248, 0.14);
       border-color: rgba(56, 189, 248, 0.4);
       color: var(--cyan);
       font-weight: 600;
     }
-    .search-wrap {
-      position: relative;
-      min-width: 250px;
-      flex: 1;
-      max-width: 320px;
-    }
+    .search-wrap { position: relative; min-width: 240px; flex: 1; max-width: 310px; }
     .search-wrap input {
       width: 100%;
       background: var(--bg-sub);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 0.5rem 0.9rem 0.5rem 2.2rem;
+      padding: 0.48rem 0.9rem 0.48rem 2.15rem;
       border-radius: 8px;
       font-size: 0.86rem;
       outline: none;
@@ -228,67 +181,60 @@
       color: var(--text-dim);
     }
 
-    /* Research Tear-Sheet Cards */
+    /* Cards Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      gap: 1.4rem;
       margin-bottom: 3.5rem;
     }
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.45rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.18s ease, border-color 0.18s ease;
     }
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       border-color: var(--border-glow);
       background: var(--bg-card-hover);
-      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
     }
 
-    /* Card Header Metadata */
     .meta-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.85rem;
       flex-wrap: wrap;
     }
-    .tag-cluster {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-    }
+    .tag-cluster { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
     .ticker {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--cyan);
       background: rgba(56, 189, 248, 0.12);
       border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 0.18rem 0.55rem;
+      padding: 0.16rem 0.55rem;
       border-radius: 6px;
     }
     .sector {
       font-size: 0.78rem;
       color: var(--text-sub);
       background: rgba(148, 163, 184, 0.1);
-      padding: 0.2rem 0.6rem;
+      padding: 0.18rem 0.58rem;
       border-radius: 6px;
     }
     .access-tag {
       font-size: 0.76rem;
       color: var(--indigo);
       background: rgba(129, 140, 248, 0.12);
-      padding: 0.2rem 0.55rem;
+      padding: 0.18rem 0.55rem;
       border-radius: 6px;
       font-weight: 500;
     }
@@ -298,35 +244,20 @@
       color: var(--text-dim);
     }
 
-    /* Title & Institutional Rating Strip */
     .title-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.6rem;
+      gap: 0.85rem;
+      margin-bottom: 0.55rem;
     }
-    .company-name {
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-    }
-    .mkt-cap {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      font-weight: 400;
-      margin-left: 0.4rem;
-    }
-    .rating-box {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-shrink: 0;
-    }
+    .company-name { font-size: 1.32rem; font-weight: 800; }
+    .mkt-cap { font-size: 0.8rem; color: var(--text-dim); font-weight: 400; margin-left: 0.4rem; }
+    .rating-box { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
     .rating-pill {
       font-size: 0.78rem;
       font-weight: 700;
-      padding: 0.22rem 0.65rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 6px;
       background: var(--emerald-bg);
       color: var(--emerald);
@@ -336,58 +267,46 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       font-weight: 700;
-      padding: 0.22rem 0.65rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 6px;
       background: var(--gold-bg);
       color: var(--gold);
       border: 1px solid rgba(251, 191, 36, 0.3);
     }
 
-    .headline {
-      font-size: 0.93rem;
-      color: #e2e8f0;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
+    .headline { font-size: 0.92rem; color: #e2e8f0; font-weight: 500; margin-bottom: 0.95rem; }
 
-    /* Key Thesis Bullets */
     .thesis-box {
       background: var(--bg-sub);
       border: 1px solid var(--border);
       border-left: 3px solid var(--cyan);
       border-radius: 10px;
-      padding: 0.9rem 1rem;
-      margin-bottom: 1rem;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.95rem;
     }
     .thesis-box ul { list-style: none; }
     .thesis-box li {
       font-size: 0.84rem;
       color: var(--text-sub);
-      margin-bottom: 0.42rem;
-      padding-left: 0.95rem;
+      margin-bottom: 0.38rem;
+      padding-left: 0.9rem;
       position: relative;
     }
     .thesis-box li:last-child { margin-bottom: 0; }
-    .thesis-box li::before {
-      content: "▸";
-      position: absolute;
-      left: 0;
-      color: var(--cyan);
-    }
+    .thesis-box li::before { content: "▸"; position: absolute; left: 0; color: var(--cyan); }
 
-    /* Mini Financial Estimate Table */
     .model-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 1.15rem;
-      background: rgba(6, 10, 20, 0.55);
+      margin-bottom: 1.1rem;
+      background: rgba(6, 10, 20, 0.6);
       border-radius: 8px;
       overflow: hidden;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
     }
     .model-table th, .model-table td {
-      padding: 0.45rem 0.6rem;
+      padding: 0.42rem 0.58rem;
       text-align: right;
       border-bottom: 1px solid rgba(148, 163, 184, 0.08);
     }
@@ -396,33 +315,24 @@
       color: var(--text-sub);
       font-family: 'Noto Sans TC', sans-serif;
     }
-    .model-table th {
-      color: var(--text-dim);
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.02);
-    }
+    .model-table th { color: var(--text-dim); font-weight: 600; background: rgba(255, 255, 255, 0.02); }
     .model-table td { color: var(--text-main); font-weight: 600; }
     .highlight-num { color: var(--emerald) !important; }
 
-    /* Card Footer */
     .card-foot {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 0.95rem;
+      padding-top: 0.9rem;
       border-top: 1px solid var(--border);
       gap: 0.75rem;
     }
-    .val-method {
-      font-size: 0.76rem;
-      color: var(--text-dim);
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .val-method { font-size: 0.75rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
     .actions { display: flex; gap: 0.5rem; }
     .btn {
       font-size: 0.82rem;
       font-weight: 600;
-      padding: 0.48rem 0.9rem;
+      padding: 0.46rem 0.88rem;
       border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
@@ -430,25 +340,13 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      transition: all 0.2s;
       font-family: inherit;
     }
-    .btn-cyan {
-      background: var(--cyan);
-      color: #060a14;
-    }
+    .btn-cyan { background: var(--cyan); color: #060a14; }
     .btn-cyan:hover { background: #7dd3fc; }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-main);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover {
-      border-color: var(--text-sub);
-      background: rgba(255, 255, 255, 0.04);
-    }
+    .btn-ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--text-sub); background: rgba(255, 255, 255, 0.05); }
 
-    /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 2rem 0 3rem;
@@ -457,12 +355,11 @@
       font-size: 0.8rem;
     }
 
-    /* Fullscreen PDF Reader Modal */
+    /* Lightweight Modal (無 blur 特效 + 載入動畫) */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(3, 6, 14, 0.9);
-      backdrop-filter: blur(8px);
+      background: rgba(3, 6, 14, 0.92);
       z-index: 100;
       display: none;
       align-items: center;
@@ -482,24 +379,19 @@
       overflow: hidden;
     }
     .modal-top {
-      padding: 0.75rem 1.2rem;
+      padding: 0.7rem 1.15rem;
       background: var(--bg-card);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
     }
-    .modal-switcher {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
+    .modal-switcher { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
     .switch-chip {
       font-size: 0.78rem;
-      padding: 0.3rem 0.65rem;
+      padding: 0.28rem 0.62rem;
       border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg-sub);
@@ -513,11 +405,40 @@
       background: rgba(56, 189, 248, 0.12);
       font-weight: 700;
     }
-    .modal-frame {
+    .frame-wrap {
+      position: relative;
       flex: 1;
       width: 100%;
-      border: none;
       background: #1e293b;
+    }
+    .loader-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--cyan);
+      font-size: 0.9rem;
+      background: #0f172a;
+      z-index: 2;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .modal-frame {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     @media (max-width: 860px) {
@@ -547,7 +468,6 @@
       </div>
     </section>
 
-    <!-- KPI Strip -->
     <section class="stats-row">
       <div class="stat-box">
         <div class="stat-label">覆蓋研究標的</div>
@@ -556,12 +476,12 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">核心追蹤產業</div>
-        <div class="stat-val" style="font-size: 1.08rem; padding-top: 0.22rem;">光通訊 / 封測 / 石英元件</div>
+        <div class="stat-val" style="font-size: 1.05rem; padding-top: 0.2rem;">光通訊 / 封測 / 石英元件</div>
         <div class="stat-note">800G・1.6T 升級與車用電子</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">研究方法論</div>
-        <div class="stat-val" style="font-size: 1.08rem; padding-top: 0.22rem;">私訪調研 + 營收拆解模型</div>
+        <div class="stat-val" style="font-size: 1.05rem; padding-top: 0.2rem;">私訪調研 + 營收拆解模型</div>
         <div class="stat-note">2025–2028F 季度損益預估</div>
       </div>
       <div class="stat-box">
@@ -571,7 +491,6 @@
       </div>
     </section>
 
-    <!-- Filter & Search -->
     <section class="toolbar">
       <div class="tabs" id="sector-tabs"></div>
       <div class="search-wrap">
@@ -580,7 +499,6 @@
       </div>
     </section>
 
-    <!-- Reports Grid -->
     <section class="grid" id="cards-grid"></section>
   </main>
 
@@ -590,24 +508,27 @@
     </div>
   </footer>
 
-  <!-- PDF Viewer Modal with Quick Switcher -->
+  <!-- Fast Modal Viewer -->
   <div class="modal" id="pdf-modal">
     <div class="modal-box">
       <div class="modal-top">
         <div class="modal-switcher" id="modal-switcher"></div>
         <div class="actions">
-          <a id="modal-download" href="#" target="_blank" class="btn btn-ghost">新分頁開啟 ↗</a>
-          <button class="btn btn-cyan" onclick="closeModal()">關閉 ✕</button>
+          <a id="modal-download" href="#" target="_blank" class="btn btn-cyan">改用原生分頁極速開啟 ↗</a>
+          <button class="btn btn-ghost" onclick="closeModal()">關閉 ✕</button>
         </div>
       </div>
-      <iframe class="modal-frame" id="pdf-frame" src=""></iframe>
+      <div class="frame-wrap">
+        <div class="loader-overlay" id="pdf-loader">
+          <div class="spinner"></div>
+          <div>正在載入 PDF 報告，若檔案較大可直接點右上角「原生分頁極速開啟」...</div>
+        </div>
+        <iframe class="modal-frame" id="pdf-frame" src=""></iframe>
+      </div>
     </div>
   </div>
 
   <script>
-    // =========================================================================
-    // 【研究報告資料庫】目前已填入你上傳的 3 份報告，其餘 3-4 份照格式往下加即可
-    // =========================================================================
     const reportsData = [
       {
         ticker: "6271",
@@ -620,7 +541,7 @@
         targetPrice: "CPO / 800G 放量",
         headline: "切入 Marvell 長距離光通訊 800G/1.6T，高毛利產品帶動三率逐季走揚",
         valuation: "估值追蹤：高 ASP 光通與車用營收佔比提升",
-        file: "同欣電(6271) .pdf", // 注意：你的檔名括號後面有一個空白，上傳到 GitHub 需完全一致
+        file: "同欣電(6271) .pdf",
         thesis: [
           "RF/光通訊強勁成長：800G（含 TIA/FAU）已量產，27 年底進入 1.6T，對位機台擴產打開產能瓶頸",
           "車用 CIS 穩健擴張：承接勝麗專利，高畫素（3M/8M）IBGA 近乎獨占，受惠中國車廠出海與 ADAS 升級",
@@ -709,25 +630,30 @@
           ]
         }
       }
-      // 第 5、6、7 份報告：直接複製上方 { ... }, 區塊貼在這裡即可！
     ];
 
-    // =========================================================================
-    // 系統渲染與互動引擎（無需修改）
-    // =========================================================================
     const grid = document.getElementById('cards-grid');
     const tabsWrap = document.getElementById('sector-tabs');
     const searchInput = document.getElementById('search-input');
     let activeSector = '全部';
 
-    // 更新頂部統計數據
+    // 背景預載機制：滑鼠移上卡片即偷抓 PDF
+    const prefetchedFiles = new Set();
+    function prefetchPDF(file) {
+      if (!file || prefetchedFiles.has(file)) return;
+      prefetchedFiles.add(file);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = encodeURI(file);
+      document.head.appendChild(link);
+    }
+
     const validReports = reportsData.filter(r => r.file && r.file.trim() !== "");
     document.getElementById('stat-total').textContent = `${validReports.length} 檔`;
     if (validReports.length > 0) {
       document.getElementById('stat-latest').textContent = validReports[0].date.slice(0, 7).replace('/', '.');
     }
 
-    // 產生分類按鈕
     const sectors = ['全部', ...new Set(reportsData.map(r => r.sector))];
     sectors.forEach(sec => {
       const btn = document.createElement('button');
@@ -742,7 +668,6 @@
       tabsWrap.appendChild(btn);
     });
 
-    // 渲染報告卡片
     function renderCards() {
       const q = searchInput.value.trim().toLowerCase();
       const list = reportsData.filter(item => {
@@ -760,7 +685,6 @@
         const encodedUrl = hasFile ? encodeURI(item.file) : "";
         const thesisHtml = item.thesis.map(t => `<li>${t}</li>`).join('');
 
-        // 財務小表格
         const thHtml = item.financials.headers.map(h => `<th>${h}</th>`).join('');
         const trHtml = item.financials.rows.map(row => {
           const tds = row.map((cell, idx) => {
@@ -770,13 +694,14 @@
           return `<tr>${tds}</tr>`;
         }).join('');
 
+        // 主按鈕改回原生新分頁極速開啟，次按鈕保留站內預覽
         const btnGroup = hasFile
-          ? `<button class="btn btn-cyan" onclick="openReader('${item.ticker}')">閱讀完整報告</button>
-             <a class="btn btn-ghost" href="${encodedUrl}" target="_blank">PDF ↗</a>`
+          ? `<a class="btn btn-cyan" href="${encodedUrl}" target="_blank" rel="noopener">閱讀完整報告 ↗</a>
+             <button class="btn btn-ghost" onclick="openReader('${item.ticker}')">快速預覽</button>`
           : `<button class="btn btn-ghost" style="opacity:0.45; cursor:not-allowed;" onclick="alert('請先上傳 PDF 並在 reportsData 填入檔名')">待上傳 PDF</button>`;
 
         return `
-          <article class="card">
+          <article class="card" onmouseenter="prefetchPDF('${item.file}')">
             <div>
               <div class="meta-top">
                 <div class="tag-cluster">
@@ -818,23 +743,27 @@
 
     searchInput.addEventListener('input', renderCards);
 
-    // Modal PDF 閱讀器與快速切換
     const modal = document.getElementById('pdf-modal');
     const pdfFrame = document.getElementById('pdf-frame');
+    const pdfLoader = document.getElementById('pdf-loader');
     const modalDownload = document.getElementById('modal-download');
     const modalSwitcher = document.getElementById('modal-switcher');
+
+    pdfFrame.onload = () => {
+      pdfLoader.style.display = 'none';
+    };
 
     function openReader(ticker) {
       const target = validReports.find(r => r.ticker === ticker) || validReports[0];
       if (!target) return;
 
-      // 建立上方快速切換按鈕
       modalSwitcher.innerHTML = validReports.map(r => `
         <button class="switch-chip ${r.ticker === target.ticker ? 'active' : ''}" onclick="openReader('${r.ticker}')">
           ${r.ticker} ${r.company}
         </button>
       `).join('');
 
+      pdfLoader.style.display = 'flex';
       const url = encodeURI(target.file);
       pdfFrame.src = url;
       modalDownload.href = url;
