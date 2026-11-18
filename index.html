@@ -35,7 +35,6 @@
       min-height: 100vh;
     }
 
-    /* Top Bar */
     nav {
       position: sticky;
       top: 0;
@@ -84,7 +83,6 @@
       padding: 0 1.5rem;
     }
 
-    /* Hero */
     .hero { padding: 2.75rem 0 1.75rem; }
     .hero-left { max-width: 720px; }
     .eyebrow {
@@ -104,7 +102,6 @@
     }
     .hero p { color: var(--text-sub); font-size: 0.96rem; }
 
-    /* KPI Strip */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -126,7 +123,6 @@
     }
     .stat-note { font-size: 0.74rem; color: var(--emerald); margin-top: 0.2rem; }
 
-    /* Filter & Search */
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -178,7 +174,6 @@
       color: var(--text-dim);
     }
 
-    /* Cards Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -326,22 +321,20 @@
     }
     .val-method { font-size: 0.75rem; color: var(--text-dim); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
-    /* 合併後的單一原生分頁按鈕 */
-    .btn-report {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
+    /* 唯一按鈕：原生新分頁極速開啟 */
+    .btn-single {
+      display: inline-block;
       background-color: var(--cyan);
       color: #060a14;
       text-decoration: none;
-      padding: 0.48rem 1rem;
+      padding: 0.48rem 1.05rem;
       border-radius: 8px;
       font-size: 0.85rem;
       font-weight: 700;
       white-space: nowrap;
       transition: background-color 0.15s;
     }
-    .btn-report:hover { background-color: #7dd3fc; }
+    .btn-single:hover { background-color: #7dd3fc; }
     .btn-disabled {
       display: inline-block;
       color: var(--text-dim);
@@ -428,9 +421,6 @@
   </footer>
 
   <script>
-    // =========================================================================
-    // 【研究報告資料庫】目前已填入 3 份報告，第 4～7 份照格式往下加即可
-    // =========================================================================
     const reportsData = [
       {
         ticker: "6271",
@@ -508,8 +498,7 @@
           ]
         }
       }
-      /* -----------------------------------------------------------------------
-         日後要新增第 4～7 份報告，複製下方這段貼在上面那筆的後面（記得保留開頭的逗號）並修改即可：
+      /* 新增第 4～7 份報告：複製下方區塊貼在上面那筆後面（保留逗號）並修改即可：
       ,{
         ticker: "代號",
         company: "公司名稱",
@@ -519,28 +508,33 @@
         date: "2026/10",
         rating: "買進",
         targetPrice: "TP -- 元",
-        headline: "一句話點出核心投資亮點",
-        valuation: "估值基準說明",
+        headline: "核心投資亮點",
+        valuation: "估值基準",
         file: "你的PDF檔名.pdf",
-        thesis: [
-          "核心觀點一",
-          "核心觀點二",
-          "核心觀點三"
-        ],
+        thesis: ["觀點一", "觀點二", "觀點三"],
         financials: {
           headers: ["預估指標", "2025", "2026F", "2027F", "2028F"],
-          rows: [
-            ["預估 EPS (元)", "-", "-", "-", "-"]
-          ]
+          rows: [["預估 EPS (元)", "-", "-", "-", "-"]]
         }
       }
-      ----------------------------------------------------------------------- */
+      */
     ];
 
     const grid = document.getElementById('cards-grid');
     const tabsWrap = document.getElementById('sector-tabs');
     const searchInput = document.getElementById('search-input');
     let activeSector = '全部';
+
+    // 滑鼠一移上卡片，立刻在背景預先下載 PDF，點擊時直接秒開
+    const prefetched = new Set();
+    function preloadFile(file) {
+      if (!file || prefetched.has(file)) return;
+      prefetched.add(file);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = encodeURI(file);
+      document.head.appendChild(link);
+    }
 
     const validReports = reportsData.filter(r => r.file && r.file.trim() !== "");
     document.getElementById('stat-total').textContent = `${validReports.length} 檔`;
@@ -576,6 +570,7 @@
 
       grid.innerHTML = list.map((item) => {
         const hasFile = item.file && item.file.trim() !== "";
+        const encodedFile = hasFile ? encodeURI(item.file) : "";
         const thesisHtml = item.thesis.map(t => `<li>${t}</li>`).join('');
 
         const thHtml = item.financials.headers.map(h => `<th>${h}</th>`).join('');
@@ -587,12 +582,12 @@
           return `<tr>${tds}</tr>`;
         }).join('');
 
-        const actionBtn = hasFile
-          ? `<a class="btn-report" href="${item.file}" target="_blank" rel="noopener">閱讀完整報告 ↗</a>`
+        const singleButton = hasFile
+          ? `<a class="btn-single" href="${encodedFile}" target="_blank">閱讀報告</a>`
           : `<span class="btn-disabled">待上傳 PDF</span>`;
 
         return `
-          <article class="card">
+          <article class="card" onmouseenter="preloadFile('${item.file}')">
             <div>
               <div class="meta-top">
                 <div class="tag-cluster">
@@ -625,7 +620,7 @@
 
             <div class="card-foot">
               <span class="val-method">${item.valuation}</span>
-              ${actionBtn}
+              ${singleButton}
             </div>
           </article>
         `;
