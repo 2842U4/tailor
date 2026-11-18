@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YANG CHENG-YING | 獨立個股與產業研究終端</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-base: #060a14;
@@ -30,7 +27,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
       background-color: var(--bg-base);
       color: var(--text-main);
       line-height: 1.6;
@@ -38,7 +35,7 @@
       min-height: 100vh;
     }
 
-    /* Top Bar (移除高耗能 backdrop-filter) */
+    /* Top Bar */
     nav {
       position: sticky;
       top: 0;
@@ -59,7 +56,7 @@
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-weight: 700;
       font-size: 0.92rem;
       letter-spacing: 0.06em;
@@ -91,7 +88,7 @@
     .hero { padding: 2.75rem 0 1.75rem; }
     .hero-left { max-width: 720px; }
     .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.78rem;
       color: var(--cyan);
       letter-spacing: 0.08em;
@@ -122,7 +119,7 @@
     }
     .stat-label { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 0.25rem; }
     .stat-val {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-main);
@@ -214,7 +211,7 @@
     }
     .tag-cluster { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
     .ticker {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-weight: 700;
       font-size: 0.84rem;
       color: var(--cyan);
@@ -239,7 +236,7 @@
       font-weight: 500;
     }
     .date-cap {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.76rem;
       color: var(--text-dim);
     }
@@ -264,7 +261,7 @@
       border: 1px solid rgba(16, 185, 129, 0.35);
     }
     .tp-pill {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.78rem;
       font-weight: 700;
       padding: 0.2rem 0.6rem;
@@ -302,7 +299,7 @@
       background: rgba(6, 10, 20, 0.6);
       border-radius: 8px;
       overflow: hidden;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.78rem;
     }
     .model-table th, .model-table td {
@@ -313,7 +310,7 @@
     .model-table th:first-child, .model-table td:first-child {
       text-align: left;
       color: var(--text-sub);
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: "Microsoft JhengHei", sans-serif;
     }
     .model-table th { color: var(--text-dim); font-weight: 600; background: rgba(255, 255, 255, 0.02); }
     .model-table td { color: var(--text-main); font-weight: 600; }
@@ -327,25 +324,31 @@
       border-top: 1px solid var(--border);
       gap: 0.75rem;
     }
-    .val-method { font-size: 0.75rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
-    .actions { display: flex; gap: 0.5rem; }
-    .btn {
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 0.46rem 0.88rem;
-      border-radius: 8px;
-      cursor: pointer;
+    .val-method { font-size: 0.75rem; color: var(--text-dim); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+    /* 第一版純淨原生分頁按鈕 */
+    .btn-pdf {
+      display: inline-block;
+      background-color: var(--cyan);
+      color: #060a14;
       text-decoration: none;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-family: inherit;
+      padding: 0.45rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background-color 0.15s;
     }
-    .btn-cyan { background: var(--cyan); color: #060a14; }
-    .btn-cyan:hover { background: #7dd3fc; }
-    .btn-ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-    .btn-ghost:hover { border-color: var(--text-sub); background: rgba(255, 255, 255, 0.05); }
+    .btn-pdf:hover { background-color: #7dd3fc; }
+    .btn-disabled {
+      display: inline-block;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.42rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
 
     footer {
       border-top: 1px solid var(--border);
@@ -353,92 +356,6 @@
       text-align: center;
       color: var(--text-dim);
       font-size: 0.8rem;
-    }
-
-    /* Lightweight Modal (無 blur 特效 + 載入動畫) */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(3, 6, 14, 0.92);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .modal.open { display: flex; }
-    .modal-box {
-      width: 100%;
-      max-width: 1160px;
-      height: 91vh;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-glow);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .modal-top {
-      padding: 0.7rem 1.15rem;
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .modal-switcher { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
-    .switch-chip {
-      font-size: 0.78rem;
-      padding: 0.28rem 0.62rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--bg-sub);
-      color: var(--text-sub);
-      cursor: pointer;
-      font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif;
-    }
-    .switch-chip.active {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      background: rgba(56, 189, 248, 0.12);
-      font-weight: 700;
-    }
-    .frame-wrap {
-      position: relative;
-      flex: 1;
-      width: 100%;
-      background: #1e293b;
-    }
-    .loader-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: var(--cyan);
-      font-size: 0.9rem;
-      background: #0f172a;
-      z-index: 2;
-    }
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 3px solid rgba(56, 189, 248, 0.2);
-      border-top-color: var(--cyan);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .modal-frame {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      height: 100%;
-      border: none;
     }
 
     @media (max-width: 860px) {
@@ -508,27 +425,10 @@
     </div>
   </footer>
 
-  <!-- Fast Modal Viewer -->
-  <div class="modal" id="pdf-modal">
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-switcher" id="modal-switcher"></div>
-        <div class="actions">
-          <a id="modal-download" href="#" target="_blank" class="btn btn-cyan">改用原生分頁極速開啟 ↗</a>
-          <button class="btn btn-ghost" onclick="closeModal()">關閉 ✕</button>
-        </div>
-      </div>
-      <div class="frame-wrap">
-        <div class="loader-overlay" id="pdf-loader">
-          <div class="spinner"></div>
-          <div>正在載入 PDF 報告，若檔案較大可直接點右上角「原生分頁極速開啟」...</div>
-        </div>
-        <iframe class="modal-frame" id="pdf-frame" src=""></iframe>
-      </div>
-    </div>
-  </div>
-
   <script>
+    // =========================================================================
+    // 【研究報告資料庫】目前已填入 3 份報告，第 4～7 份照格式往下加即可
+    // =========================================================================
     const reportsData = [
       {
         ticker: "6271",
@@ -605,23 +505,25 @@
             ["業務轉型", "結構調整期", "自有檢測設備", "毛利率擴張幅度"]
           ]
         }
-      },
-      {
-        ticker: "待新增 #4",
-        company: "上傳第 4 份報告後替換",
+      }
+      /* -----------------------------------------------------------------------
+         日後要新增第 4～7 份報告，把下面這段複製貼在上面那筆的後面（記得加逗號）並修改即可：
+      ,{
+        ticker: "代號",
+        company: "公司名稱",
         mktCap: "市值 -- 億",
-        sector: "AI 供應鏈",
-        accessType: "法說 / 拜訪",
+        sector: "產業分類",
+        accessType: "法說 / 私訪",
         date: "2026/10",
         rating: "買進",
         targetPrice: "TP -- 元",
-        headline: "將 PDF 上傳至 GitHub 後，在此填入公司代號、核心投資邏輯與預估 EPS",
-        valuation: "估值模型：PE / DCF",
-        file: "",
+        headline: "一句話點出核心投資亮點",
+        valuation: "估值基準說明",
+        file: "你的PDF檔名.pdf",
         thesis: [
-          "核心觀點一：填寫關鍵產品放量時程與市占率變化",
-          "核心觀點二：填寫毛利率或產品組合優化推演",
-          "核心觀點三：填寫目標價計算基準與下檔風險"
+          "核心觀點一",
+          "核心觀點二",
+          "核心觀點三"
         ],
         financials: {
           headers: ["預估指標", "2025", "2026F", "2027F", "2028F"],
@@ -630,23 +532,13 @@
           ]
         }
       }
+      ----------------------------------------------------------------------- */
     ];
 
     const grid = document.getElementById('cards-grid');
     const tabsWrap = document.getElementById('sector-tabs');
     const searchInput = document.getElementById('search-input');
     let activeSector = '全部';
-
-    // 背景預載機制：滑鼠移上卡片即偷抓 PDF
-    const prefetchedFiles = new Set();
-    function prefetchPDF(file) {
-      if (!file || prefetchedFiles.has(file)) return;
-      prefetchedFiles.add(file);
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = encodeURI(file);
-      document.head.appendChild(link);
-    }
 
     const validReports = reportsData.filter(r => r.file && r.file.trim() !== "");
     document.getElementById('stat-total').textContent = `${validReports.length} 檔`;
@@ -682,7 +574,6 @@
 
       grid.innerHTML = list.map((item) => {
         const hasFile = item.file && item.file.trim() !== "";
-        const encodedUrl = hasFile ? encodeURI(item.file) : "";
         const thesisHtml = item.thesis.map(t => `<li>${t}</li>`).join('');
 
         const thHtml = item.financials.headers.map(h => `<th>${h}</th>`).join('');
@@ -694,14 +585,13 @@
           return `<tr>${tds}</tr>`;
         }).join('');
 
-        // 主按鈕改回原生新分頁極速開啟，次按鈕保留站內預覽
-        const btnGroup = hasFile
-          ? `<a class="btn btn-cyan" href="${encodedUrl}" target="_blank" rel="noopener">閱讀完整報告 ↗</a>
-             <button class="btn btn-ghost" onclick="openReader('${item.ticker}')">快速預覽</button>`
-          : `<button class="btn btn-ghost" style="opacity:0.45; cursor:not-allowed;" onclick="alert('請先上傳 PDF 並在 reportsData 填入檔名')">待上傳 PDF</button>`;
+        // 第一版純淨原生分頁超連結
+        const actionBtn = hasFile
+          ? `<a class="btn-pdf" href="${item.file}" target="_blank">閱讀 PDF</a>`
+          : `<span class="btn-disabled">待上傳 PDF</span>`;
 
         return `
-          <article class="card" onmouseenter="prefetchPDF('${item.file}')">
+          <article class="card">
             <div>
               <div class="meta-top">
                 <div class="tag-cluster">
@@ -734,7 +624,7 @@
 
             <div class="card-foot">
               <span class="val-method">${item.valuation}</span>
-              <div class="actions">${btnGroup}</div>
+              ${actionBtn}
             </div>
           </article>
         `;
@@ -742,44 +632,6 @@
     }
 
     searchInput.addEventListener('input', renderCards);
-
-    const modal = document.getElementById('pdf-modal');
-    const pdfFrame = document.getElementById('pdf-frame');
-    const pdfLoader = document.getElementById('pdf-loader');
-    const modalDownload = document.getElementById('modal-download');
-    const modalSwitcher = document.getElementById('modal-switcher');
-
-    pdfFrame.onload = () => {
-      pdfLoader.style.display = 'none';
-    };
-
-    function openReader(ticker) {
-      const target = validReports.find(r => r.ticker === ticker) || validReports[0];
-      if (!target) return;
-
-      modalSwitcher.innerHTML = validReports.map(r => `
-        <button class="switch-chip ${r.ticker === target.ticker ? 'active' : ''}" onclick="openReader('${r.ticker}')">
-          ${r.ticker} ${r.company}
-        </button>
-      `).join('');
-
-      pdfLoader.style.display = 'flex';
-      const url = encodeURI(target.file);
-      pdfFrame.src = url;
-      modalDownload.href = url;
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      modal.classList.remove('open');
-      pdfFrame.src = '';
-      document.body.style.overflow = '';
-    }
-
-    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
     renderCards();
   </script>
 </body>
